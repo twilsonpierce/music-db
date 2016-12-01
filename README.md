@@ -6,6 +6,7 @@ This time we'll be creating a music database from the ground up. You'll need to 
 - make sure Postgres.app is open and running in the background
 - in Postico, create a new database called 'music-db'
 - `npm install`
+- run `npm start` to start the app
 
 ## Models
 Edit the files in the 'models' folder to create the following models.
