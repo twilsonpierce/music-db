@@ -67,8 +67,10 @@ app.put('/api/artists/:id/:newName', (req,res)=>{
 
 app.get('/api/songs', (req,res)=>{
 	Song.findAll()
-	.then((data)=>{
-		console.log(data, 'We have all the songs!');
+	.then((error)=>{
+		console.log(data, 'we have all the songs');
 		res.send(data);
+	}).catch((error)=>{
+		res.sendStatus(200);
 	})
 })
