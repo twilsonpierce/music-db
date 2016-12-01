@@ -52,7 +52,7 @@ app.post('/api/artists', (req,res) =>{
 	})
 })
 
-app.delete('/api/artists/:id', (req,res)=>{
+app.delete('`/api/artists/:id', (req,res)=>{
 	Artist.destroy(
 		{where: {id: req.params.id}})
 	.then((data,error)=>{
