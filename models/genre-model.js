@@ -16,6 +16,4 @@ var Genre = sequelizeConnection.define('genre', {
 });
 
 
-
-
 module.exports = Genre;
