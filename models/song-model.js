@@ -1,19 +1,21 @@
 const Sequelize = require('sequelize');
 const sequelizeConnection = require('../db');
+const Artist = require('./artist-model.js');
+const Genre = require('./genre-model.js');
+const Playlist = require('./playlist-model.js');
 
 //////////
 // YOUR CODE HERE:
 //////////
 
-var Song = this.sequelizeConnection.define('song', {
+var Song = sequelizeConnection.define('song', {
 	title:{
 		type: Sequelize.STRING,
 		validate:{
 			len:[1,250]
 		}
-	}
-
-	youtube_url:{
+	},
+	youtube_url: {
 		type: Sequelize.STRING,
 		validate:{
 			len:[1,50],
@@ -22,9 +24,12 @@ var Song = this.sequelizeConnection.define('song', {
 	}
 });
 
+
 Song.belongsTo(Artist);
-Song.belongsToMany(Genre,{through:'SongGenre'});
-Song.belongsToMany(Playlist, {through: 'SongPlaylist'});
+
+Song.belongsToMany(Genre,{through:'UniqueGenres'});
+// Song.belongsToMany(Playlist, {through: 'UniquePlaylist'});
+
 
 
 module.exports = Song;
