@@ -34,33 +34,45 @@ app.get('/api/artists/:id', (req,res)=>{
 	.then((data)=>{
 		console.log(data, 'We got this artists!')
 		res.send(data);
-	}).catch((error)=>{
-	console.log(error,'Error!!!!')
+	})
+	.catch((error)=>{
+		console.log(error,'Error!!!!')
 	})
 })
 
 app.post('/api/artists', (req,res) =>{
-	Artist.create({name:req.body.name}).then((data)=>{
+	Artist.create(
+		{name:req.body.name})
+	.then((data)=>{
 		console.log(data, 'New Artists!');
 		res.send(data);
-	}).catch((error) =>{
-	console.log(error,'Error!!!')
+	})
+	.catch((error) =>{
+		console.log(error,'Error!!!')
 	})
 })
+
 app.delete('/api/artists/:id', (req,res)=>{
-	Artist.destroy({where: {id: req.params.id}}).then((data,error)=>{
-		console.log(data, 'you deleted it!');
-		res.sendStatus(200);
-	}).catch((err)=>{
-	console.log(err, 'Error!')
+	Artist.destroy(
+		{where: {id: req.params.id}})
+	.then((data,error)=>{
+			console.log(data, 'you deleted it!');
+			res.sendStatus(200);
+	})
+	.catch((err)=>{
+		console.log(err, 'Error!')
 	})
 })
+
 app.put('/api/artists/:id/:newName', (req,res)=>{
-	Artist.update({name:req.params.newName},{where:{id:req.params.id}})
+	Artist.update(
+		{name:req.params.newName},
+		{where:{id:req.params.id}})
 	.then((data)=>{
 		res.sendStatus(200);
-	}).catch((error) =>{
-	console.log(error,'Error!!!')
+	})
+	.catch((error) =>{
+		console.log(error,'Error!!!')
 	})
 })
 
