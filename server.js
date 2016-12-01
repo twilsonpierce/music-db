@@ -6,6 +6,7 @@ const Sequelize = require('sequelize');
 const sequelizeConnection = require('./db');
 const Artist = require('./models/artist-model.js');
 const Song = require('./models/song-model.js');
+const Genre = require('./models/genre-model.js');
 
 //body-parser middleware adds .body property to req (if we make a POST AJAX request with some data attached, that data will be accessible as req.body)
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -83,8 +84,70 @@ app.get('/api/songs', (req,res)=>{
 		console.log(data, 'we have all the songs');
 		res.send(data);
 	}).catch((error)=>{
-		res.sendStatus(200);
+		console.log(error);
 	})
 })
 
-//work 
+app.get('/api/songs/:id', (req, res)=>{
+	Song.findById(req.params.id)
+	.then((data)=>{
+		res.send(data)
+	})
+	.catch((error)=>{
+		console.log(error)
+	})
+})
+
+app.post("/api/songs", (req, res)=>{
+	var globalSong;
+	Artist.findOrCreate({
+		where: {name: req.body.artist}
+	})
+	.then((artist)=>{
+		 Song.findOrCreate({
+			where: {
+				title: req.body.song,
+				youtube_url: req.body.url,
+				artistId: artist[0].dataValues.id
+			}
+		})
+		.then((song)=>{
+			//console.log(song)
+			//globalSong = song;
+			Genre.findOrCreate({
+				where: {
+					title: req.body.genre
+				}
+			})
+			.then((genre)=>{
+				console.log(genre[0]);
+			//	globalSong.addGenres([genre[0].dataValues.id])
+			 })
+		})
+
+
+	})
+
+})
+
+
+app.get('/api/genre/:genre', (req, res)=>{
+	Genre.findOne({
+		where:
+			{title: req.params.genre}
+	})
+	.then((data)=>{
+		console.log(data.dataValues.id)
+		res.send(data)
+	})
+	.catch((error)=>{
+		console.log(error)
+	})
+})
+
+// first, find or create artist,
+// then, we find or create song,
+// then, accessor method we add artist to song
+// then, we find or create genre,
+// then, we add genre to song
+//artist:, song:, youtubeurl:, genre: ,
