@@ -23,8 +23,8 @@ var Song = this.sequelizeConnection.define('song', {
 });
 
 Song.belongsTo(Artist);
-Song.belongsToMany(Genre,{through:'UniqueGenres'});
-Song.belongsToMany(Playlist, {through: 'Tunes'});
+Song.belongsToMany(Genre,{through:'SongGenre'});
+Song.belongsToMany(Playlist, {through: 'SongPlaylist'});
 
 
 module.exports = Song;

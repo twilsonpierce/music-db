@@ -14,6 +14,6 @@ var Genre = sequelizeConnection.define('genre', {
 	}
 });
 
-Genre.belongsToMany(Song, {through: 'UniqueGenres'})
+Genre.belongsToMany(Song, {through: 'SongGenre'});
 
 module.exports = Genre;

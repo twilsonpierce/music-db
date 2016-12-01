@@ -14,6 +14,6 @@ var Playlist = this.sequelizeConnection.define('playlist'{
 	}
 });
 
-Playlist.belongsToMany(Song, {through: 'Tunes'});
+Playlist.belongsToMany(Song, {through: 'SongPlaylist'});
 
 module.exports = Playlist;
