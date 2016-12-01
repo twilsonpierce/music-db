@@ -2,13 +2,14 @@ const Sequelize = require('sequelize');
 const sequelizeConnection = require('../db');
 
 // create the Artist model
-var Artist = sequelizeConnection.define('artist', {
-  name: {
-    type: Sequelize.STRING,
+var Genre = sequelizeConnection.define('genre', {
+  title: {
+    type: Sequelize.TEXT,
     validate: {
       len: [1, 50]
     }
   }
 });
 
-module.exports = Artist;
+
+module.exports = Genre;
