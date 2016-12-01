@@ -79,7 +79,7 @@ app.put('/api/artists/:id/:newName', (req,res)=>{
 
 app.get('/api/songs', (req,res)=>{
 	Song.findAll()
-	.then((error)=>{
+	.then((data)=>{
 		console.log(data, 'we have all the songs');
 		res.send(data);
 	}).catch((error)=>{
