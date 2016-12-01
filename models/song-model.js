@@ -2,7 +2,6 @@ const Sequelize = require('sequelize');
 const sequelizeConnection = require('../db');
 const Artist = require('./artist-model.js');
 const Genre = require('./genre-model.js');
-const Playlist = require('./playlist-model.js');
 
 //////////
 // YOUR CODE HERE:
@@ -24,12 +23,9 @@ var Song = sequelizeConnection.define('song', {
 	}
 });
 
-
 Song.belongsTo(Artist);
 
-Song.belongsToMany(Genre,{through:'UniqueGenres'});
-// Song.belongsToMany(Playlist, {through: 'UniquePlaylist'});
-
-
+Song.belongsToMany(Genre,{through:'Song_Genre'});
+Genre.belongsToMany(Song,{through:'Song_Genre'});
 
 module.exports = Song;
