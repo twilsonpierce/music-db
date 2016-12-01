@@ -83,7 +83,7 @@ app.get('/api/songs', (req,res)=>{
 		console.log(data, 'we have all the songs');
 		res.send(data);
 	}).catch((error)=>{
-		res.sendStatus(200);
+		console.log(error);
 	})
 })
 
