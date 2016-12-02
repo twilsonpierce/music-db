@@ -87,4 +87,137 @@ app.get('/api/songs', (req,res)=>{
 	})
 })
 
-//work 
+app.get('/api/songs/:id', (req, res)=>{
+	Song.findById(req.params.id)
+	.then((data)=>{
+		res.send(data)
+	})
+	.catch((error)=>{
+		console.log(error)
+	})
+})
+
+app.post("/api/songs", (req, res)=>{
+	Artist.findOrCreate({
+		where: {name: req.body.artist}
+	})
+	.then((artist)=>{
+		 Song.findOrCreate({
+			where: {
+				title: req.body.song,
+				youtube_url: req.body.url,
+				artistId: artist[0].dataValues.id
+			}
+		})
+		.then(()=>{
+			Genre.findOrCreate({
+				where: {
+					title: req.body.genre
+				}
+			})
+			.then((genre)=>{
+				console.log(genre[0]);
+				Song.addGenres([genre[0].dataValues.id])
+			 })
+		})
+
+
+	})
+
+})
+
+
+app.get('/api/genre/:genre', (req, res)=>{
+	Genre.findOne({
+		where:
+			{title: req.params.genre}
+	})
+	.then((data)=>{
+		console.log(data.dataValues.id)
+		res.send(data)
+	})
+	.catch((error)=>{
+		console.log(error)
+	})
+})
+
+
+app.put('/api/songs/:id/:newTitle', (req,res) =>{
+	Song.update({title:req.params.title}, {where:{id:req.params.id}})
+	.then((data)=>{
+		console.log(data, 'I updated the song title by their id')
+		res.send(data);
+	}).catch((error)=>{
+		res.send(error, 'Error!!');
+	})
+})
+
+app.delete('/api/songs/:id', (req,res)=>{
+	Song.destroy({where:{id:req.params.id}})
+	.then((data)=>{
+		console.log(data,'I just deleted the folowing song');
+		res.send(data);
+	}).catch((error) =>{
+		res.send(error, 'Error!');
+	})
+})
+
+app.get('/api/playlists', (req,res)=>{
+	Playlist.findAll()
+	.then((data)=>{
+		console.log(data, 'I have all the playlists!');
+		res.send(data);
+	}).catch((error)=>{
+		res.send(error, 'Error!');
+	})
+})
+
+app.get('/api/playlists/:id', (req,res)=>{
+	Playlist.findById({id:req.params.id})
+	.then((data)=>{
+		console.log(data, 'I found this playlist!');
+		res.send(data);
+	}).catch((error)=>{
+		res.send(error, 'Error!');
+	})
+})
+
+//Skipping # 13 --- USING POST METHOD TO CREATE A NEW PLAYLIST 
+//Skipping #17  --- USING POST METHOD TO CREATE A NEW GENRE 
+
+app.delete('/api/playlists/:id', (req,res)=>{
+	Playlist.destroy({where:{id:req.params.id}})
+	.then((data)=>{
+		console.log(data, 'I just deleted this playlists');
+		res.send(data);
+	}).catch((error)=>{
+		res.send(error, 'Error!!');
+	})
+})
+
+app.get('/api/genres', (req,res)=>{
+	Genre.findAll()
+	.then((data)=>{
+		console.log(data, 'this is all the of genres');
+		res.send(data);
+	}).catch((error)=>{
+		res.send(error, 'Error!');
+	})
+})
+
+app.get('/api/genres/:id/:newGenre', (req,res)=>{
+	Genre.update({title:req.params.title}, {where:{id:req.params.id}})
+	.then((data)=>{
+		console.log(data, 'I updated the song title by their id')
+		res.send(data);
+	}).catch((error)=>{
+		res.send(error, 'Error!!');
+	})
+})
+// first, find or create artist,
+// then, we find or create song,
+// then, accessor method we add artist to song
+// then, we find or create genre,
+// then, we add genre to song
+//artist:, song:, youtubeurl:, genre: ,
+//up to date changes.
