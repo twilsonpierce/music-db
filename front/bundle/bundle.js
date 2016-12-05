@@ -63,16 +63,35 @@
 	
 	var _reactRouter = __webpack_require__(179);
 	
-	__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./css/Navbar.css\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-	
 	var _Navbar = __webpack_require__(234);
 	
 	var _Navbar2 = _interopRequireDefault(_Navbar);
+	
+	var _Artists = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./Component/Artists\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	
+	var _Artists2 = _interopRequireDefault(_Artists);
+	
+	var _Songs = __webpack_require__(236);
+	
+	var _Songs2 = _interopRequireDefault(_Songs);
+	
+	var _Playlist = __webpack_require__(237);
+	
+	var _Playlist2 = _interopRequireDefault(_Playlist);
+	
+	var _CreatePlaylist = __webpack_require__(238);
+	
+	var _CreatePlaylist2 = _interopRequireDefault(_CreatePlaylist);
+	
+	var _IndividualPlaylist = __webpack_require__(239);
+	
+	var _IndividualPlaylist2 = _interopRequireDefault(_IndividualPlaylist);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	//import Navbar from './Test'
 	
+	//Files
 	var App = _react2.default.createClass({
 		displayName: 'App',
 		render: function render() {
@@ -82,15 +101,21 @@
 				_react2.default.createElement(_Navbar2.default, null)
 			);
 		}
-	});
+	}); //React
 	
-	//Files
-	//React
 	
 	_reactDom2.default.render(_react2.default.createElement(
 		_reactRouter.Router,
 		{ history: _reactRouter.browserHistory },
-		_react2.default.createElement(_reactRouter.Route, { path: '/', component: App })
+		_react2.default.createElement(
+			_reactRouter.Route,
+			{ path: '/', component: App },
+			_react2.default.createElement(_reactRouter.Route, { path: '/artists', component: _Artists2.default }),
+			_react2.default.createElement(_reactRouter.Route, { path: '/songs', component: _Songs2.default }),
+			_react2.default.createElement(_reactRouter.Route, { path: '/playlist', component: _Playlist2.default }),
+			_react2.default.createElement(_reactRouter.Route, { path: '/create-playlist', component: _CreatePlaylist2.default }),
+			_react2.default.createElement(_reactRouter.Route, { path: '/individual-playlist', component: _IndividualPlaylist2.default })
+		)
 	), document.getElementById('app'));
 
 /***/ },
@@ -26421,10 +26446,6 @@
 	
 	var _reactRouter = __webpack_require__(179);
 	
-	var _Navbar = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./css/Navbar.css\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-	
-	var _Navbar2 = _interopRequireDefault(_Navbar);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Navbar = function Navbar() {
@@ -26458,6 +26479,31 @@
 	};
 	
 	exports.default = Navbar;
+
+/***/ },
+/* 235 */,
+/* 236 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+/***/ },
+/* 237 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+/***/ },
+/* 238 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+/***/ },
+/* 239 */
+/***/ function(module, exports) {
+
+	"use strict";
 
 /***/ }
 /******/ ]);
