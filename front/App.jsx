@@ -1,18 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import {Router,Route,Link,broswerHistory} from'react-router';
 
 const App = React.createClass({
 	render(){
 		return (
 		<div>
-		<h1> Hello World! </h1> 
+		{this.props.children}
 		</div>
 
 		)
 	}
 })
 ReactDOM.render(
-<App/>,
-document.getElementById('app')
+<Router history={broswerHistory}>
+	<Route path="/" component={App}>
+	</Route>
+</Router>
+,document.getElementById('app')
 )
