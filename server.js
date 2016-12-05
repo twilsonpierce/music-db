@@ -224,6 +224,8 @@ app.get('/api/genres/:id/:newGenre', (req,res)=>{
 app.get('/*', (req,res)=>{
 	res.sendFile(path.join(__dirname, 'front/index.html'));
 })
+
+
 // first, find or create artist,
 // then, we find or create song,
 // then, accessor method we add artist to song
