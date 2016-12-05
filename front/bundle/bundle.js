@@ -63,9 +63,7 @@
 	
 	var _reactRouter = __webpack_require__(179);
 	
-	__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./css/Navbar.css\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-	
-	var _Navbar = __webpack_require__(234);
+	var _Navbar = __webpack_require__(235);
 	
 	var _Navbar2 = _interopRequireDefault(_Navbar);
 	
@@ -73,6 +71,7 @@
 	
 	//import Navbar from './Test'
 	
+	//React
 	var App = _react2.default.createClass({
 		displayName: 'App',
 		render: function render() {
@@ -83,9 +82,9 @@
 			);
 		}
 	});
+	// import './css-folder/Navbar.css';
 	
 	//Files
-	//React
 	
 	_reactDom2.default.render(_react2.default.createElement(
 		_reactRouter.Router,
@@ -26406,13 +26405,14 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 234 */
+/* 234 */,
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	   value: true
+	  value: true
 	});
 	
 	var _react = __webpack_require__(2);
@@ -26428,33 +26428,33 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Navbar = function Navbar() {
-	   return _react2.default.createElement(
-	      'div',
-	      { id: 'navbar' },
-	      _react2.default.createElement(
-	         _reactRouter.Link,
-	         { to: '/artists' },
-	         'Artists'
-	      ),
-	      _react2.default.createElement('br', null),
-	      _react2.default.createElement(
-	         _reactRouter.Link,
-	         { to: '/songs' },
-	         'Songs'
-	      ),
-	      _react2.default.createElement('br', null),
-	      _react2.default.createElement(
-	         _reactRouter.Link,
-	         { to: '/playlist' },
-	         'Playlist'
-	      ),
-	      _react2.default.createElement('br', null),
-	      _react2.default.createElement(
-	         _reactRouter.Link,
-	         { to: '/create-playlist' },
-	         'Create-Playlist'
-	      )
-	   );
+	  return _react2.default.createElement(
+	    'div',
+	    { id: 'navbar' },
+	    _react2.default.createElement(
+	      _reactRouter.Link,
+	      { to: '/artists' },
+	      'Artists'
+	    ),
+	    _react2.default.createElement('br', null),
+	    _react2.default.createElement(
+	      _reactRouter.Link,
+	      { to: '/songs' },
+	      'Songs'
+	    ),
+	    _react2.default.createElement('br', null),
+	    _react2.default.createElement(
+	      _reactRouter.Link,
+	      { to: '/playlist' },
+	      'Playlist'
+	    ),
+	    _react2.default.createElement('br', null),
+	    _react2.default.createElement(
+	      _reactRouter.Link,
+	      { to: '/create-playlist' },
+	      'Create-Playlist'
+	    )
+	  );
 	};
 	
 	exports.default = Navbar;
