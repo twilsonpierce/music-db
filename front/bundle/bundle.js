@@ -63,21 +63,31 @@
 	
 	var _reactRouter = __webpack_require__(179);
 	
+	var _Navbar = __webpack_require__(234);
+	
+	var _Navbar2 = _interopRequireDefault(_Navbar);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	//import Navbar from './Test'
+	
+	//React
 	var App = _react2.default.createClass({
 		displayName: 'App',
 		render: function render() {
 			return _react2.default.createElement(
 				'div',
 				null,
-				this.props.children
+				_react2.default.createElement(_Navbar2.default, null)
 			);
 		}
 	});
+	
+	//Files
+	
 	_reactDom2.default.render(_react2.default.createElement(
 		_reactRouter.Router,
-		{ history: _reactRouter.broswerHistory },
+		{ history: _reactRouter.browserHistory },
 		_react2.default.createElement(_reactRouter.Route, { path: '/', component: App })
 	), document.getElementById('app'));
 
@@ -26392,6 +26402,55 @@
 	  });
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+
+/***/ },
+/* 234 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Navbar = function Navbar() {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      'ul',
+	      null,
+	      _react2.default.createElement(
+	        'li',
+	        null,
+	        'Artists'
+	      ),
+	      _react2.default.createElement(
+	        'li',
+	        null,
+	        'Songs'
+	      ),
+	      _react2.default.createElement(
+	        'li',
+	        null,
+	        'Playlists'
+	      ),
+	      _react2.default.createElement(
+	        'li',
+	        null,
+	        'Create Playlist'
+	      )
+	    )
+	  );
+	};
+	
+	exports.default = Navbar;
 
 /***/ }
 /******/ ]);
