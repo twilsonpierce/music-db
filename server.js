@@ -114,36 +114,30 @@ app.post('/api/songs', (req, res)=>{
 			})
 		.then((genre)=>{
 			genreID = genre[0].dataValues.id
-			// console.log('GENREID', genreID)
 		})
-}
+	}
 	helpermethod();
 		Artist.findOrCreate({
 			where: {name: req.body.artist}
+		})
+	.then((artist)=>{
+			return Song.findOrCreate({
+			 where: {
+				 title: req.body.song,
+				 youtube_url: req.body.url,
+				 artistId: artist[0].dataValues.id
+				}
 			})
-			.then((artist)=>{
-				// console.log('artist===>', artist) //artist works!!!!!
-					return Song.findOrCreate({
-					 where: {
-						 title: req.body.song,
-						 youtube_url: req.body.url,
-						 artistId: artist[0].dataValues.id
-						}
-					})
-			})
-			.then((song)=>{
-				console.log('song ====> CHECK:', song)
-				// console.log('SONG====>', song)
-				//  console.log('genreId =====>', genreID)
-				console.log('checking song.addgenres:',song.addGenre)
-				  song.addGenres([genreID])
-			 })
-			 .then((data) => {
-				 res.sendStatus(200)
-			 })
-			 .catch( (err) => {
-				 console.log("Error with posting new song", err)
-			 })
+		})
+	.then((song)=>{
+			song[0].addGenres([genreID])
+	 })
+	 .then((data) => {
+		 	res.sendStatus(200)
+	 })
+	 .catch( (err) => {
+		 console.log("Error with posting new song", err)
+	 })
 })
 
 
