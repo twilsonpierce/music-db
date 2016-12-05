@@ -7,6 +7,11 @@ const sequelizeConnection = require('./db');
 const Artist = require('./models/artist-model.js');
 const Song = require('./models/song-model.js');
 
+
+//This app file will not be used using express instead it will be excluded 
+
+app.use(express.static(path.join(__dirname, '/front/bundle')));
+
 //body-parser middleware adds .body property to req (if we make a POST AJAX request with some data attached, that data will be accessible as req.body)
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -213,6 +218,11 @@ app.get('/api/genres/:id/:newGenre', (req,res)=>{
 	}).catch((error)=>{
 		res.send(error, 'Error!!');
 	})
+})
+
+//THIS IS OUR FRONT-END 
+app.get('/*', (req,res)=>{
+	res.sendFile(path.join(__dirname, 'front/index.html'));
 })
 // first, find or create artist,
 // then, we find or create song,
