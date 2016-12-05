@@ -241,10 +241,4 @@ app.get('/*', (req,res)=>{
 })
 
 
-// first, find or create artist,
-// then, we find or create song,
-// then, accessor method we add artist to song
-// then, we find or create genre,
-// then, we add genre to song
-//artist:, song:, youtubeurl:, genre: ,
-//up to date changes.
+//UP TO DATE

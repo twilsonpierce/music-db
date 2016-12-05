@@ -1,14 +1,24 @@
 import React from 'react';
+import {Link} from 'react-router';
+import  css from './css/Navbar.css';
+
 
 const Navbar = () => (
-  <div>
-    <ul>
-      <li>Artists</li>
-      <li>Songs</li>
-      <li>Playlists</li>
-      <li>Create Playlist</li>
-    </ul>
+
+
+  <div id="navbar">
+     <Link to="/artists">Artists</Link>
+     <br/>
+     <Link to="/songs">Songs</Link>
+     <br/>
+     <Link to="/playlist">Playlist</Link>
+     <br/>
+     <Link to="/create-playlist">Create-Playlist</Link>
+     
+
+
   </div>
+
 )
 
 export default Navbar;
