@@ -1,8 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router';
-import  css from './css/Navbar.css';
-
-
 const Navbar = () => (
   <div id="navbar">
     <Link to="/artists">Artists</Link>
