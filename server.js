@@ -6,9 +6,10 @@ const Sequelize = require('sequelize');
 const sequelizeConnection = require('./db');
 const Artist = require('./models/artist-model.js');
 const Song = require('./models/song-model.js');
+const Genre = require('./models/genre-model.js');
 
 
-//This app file will not be used using express instead it will be excluded 
+//This app file will not be used using express instead it will be excluded
 
 app.use(express.static(path.join(__dirname, '/front/bundle')));
 
@@ -102,33 +103,47 @@ app.get('/api/songs/:id', (req, res)=>{
 	})
 })
 
-app.post("/api/songs", (req, res)=>{
-	Artist.findOrCreate({
-		where: {name: req.body.artist}
-	})
-	.then((artist)=>{
-		 Song.findOrCreate({
-			where: {
-				title: req.body.song,
-				youtube_url: req.body.url,
-				artistId: artist[0].dataValues.id
-			}
-		})
-		.then(()=>{
-			Genre.findOrCreate({
-				where: {
-					title: req.body.genre
-				}
+//======================================================================
+//refactored version
+
+app.post('/api/songs', (req, res)=>{
+	let genreID;
+	function helpermethod(){
+		Genre.findOrCreate({
+				where: {title: req.body.genre}
 			})
-			.then((genre)=>{
-				console.log(genre[0]);
-				Song.addGenres([genre[0].dataValues.id])
-			 })
+		.then((genre)=>{
+			genreID = genre[0].dataValues.id
+			// console.log('GENREID', genreID)
 		})
-
-
-	})
-
+}
+	helpermethod();
+		Artist.findOrCreate({
+			where: {name: req.body.artist}
+			})
+			.then((artist)=>{
+				// console.log('artist===>', artist) //artist works!!!!!
+					return Song.findOrCreate({
+					 where: {
+						 title: req.body.song,
+						 youtube_url: req.body.url,
+						 artistId: artist[0].dataValues.id
+						}
+					})
+			})
+			.then((song)=>{
+				console.log('song ====> CHECK:', song)
+				// console.log('SONG====>', song)
+				//  console.log('genreId =====>', genreID)
+				console.log('checking song.addgenres:',song.addGenre)
+				  song.addGenres([genreID])
+			 })
+			 .then((data) => {
+				 res.sendStatus(200)
+			 })
+			 .catch( (err) => {
+				 console.log("Error with posting new song", err)
+			 })
 })
 
 
@@ -187,8 +202,8 @@ app.get('/api/playlists/:id', (req,res)=>{
 	})
 })
 
-//Skipping # 13 --- USING POST METHOD TO CREATE A NEW PLAYLIST 
-//Skipping #17  --- USING POST METHOD TO CREATE A NEW GENRE 
+//Skipping # 13 --- USING POST METHOD TO CREATE A NEW PLAYLIST
+//Skipping #17  --- USING POST METHOD TO CREATE A NEW GENRE
 
 app.delete('/api/playlists/:id', (req,res)=>{
 	Playlist.destroy({where:{id:req.params.id}})
@@ -220,7 +235,7 @@ app.get('/api/genres/:id/:newGenre', (req,res)=>{
 	})
 })
 
-//THIS IS OUR FRONT-END 
+//THIS IS OUR FRONT-END
 app.get('/*', (req,res)=>{
 	res.sendFile(path.join(__dirname, 'front/index.html'));
 })
