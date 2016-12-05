@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize');
-const sequelizeConnection = require
-('../db');
+const sequelizeConnection = require('../db');
 const Song = require('./song-model.js')
 
 //////////

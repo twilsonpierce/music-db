@@ -8,6 +8,11 @@ const Artist = require('./models/artist-model.js');
 const Song = require('./models/song-model.js');
 const Genre = require('./models/genre-model.js');
 
+
+//This app file will not be used using express instead it will be excluded
+
+app.use(express.static(path.join(__dirname, '/front/bundle')));
+
 //body-parser middleware adds .body property to req (if we make a POST AJAX request with some data attached, that data will be accessible as req.body)
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -53,7 +58,7 @@ app.post('/api/artists', (req,res) =>{
 	})
 })
 
-app.delete('/api/artists/:id', (req,res)=>{
+app.delete('`/api/artists/:id', (req,res)=>{
 	Artist.destroy(
 		{where: {id: req.params.id}})
 	.then((data,error)=>{
@@ -98,95 +103,142 @@ app.get('/api/songs/:id', (req, res)=>{
 	})
 })
 
-
+//======================================================================
 //refactored version
 
 app.post('/api/songs', (req, res)=>{
 	let genreID;
-	Genre.findOrCreate({
+	function helpermethod(){
+		Genre.findOrCreate({
 				where: {title: req.body.genre}
 			})
 		.then((genre)=>{
 			genreID = genre[0].dataValues.id
-			console.log(genreID)
+			// console.log('GENREID', genreID)
 		})
-
-	Artist.findOrCreate({
-		where: {name: req.body.artist}
-	})
-	.then((artist)=>{
-		Song.findOrCreate({
-		 where: {
-			 title: req.body.song,
-			 youtube_url: req.body.url,
-			 artistId: artist[0].dataValues.id
-			}
-		})
-	})
-	.then((song)=>{
-		 console.log(song)
-		 song.addGenres([genreID])
-	 })
-	 .then((data) => {
-		 res.senStatus(200)
-	 })
-	 .catch( (err) => {
-		 console.log("Error with posting new song", err)
-	 })
+}
+	helpermethod();
+		Artist.findOrCreate({
+			where: {name: req.body.artist}
+			})
+			.then((artist)=>{
+				// console.log('artist===>', artist) //artist works!!!!!
+					return Song.findOrCreate({
+					 where: {
+						 title: req.body.song,
+						 youtube_url: req.body.url,
+						 artistId: artist[0].dataValues.id
+						}
+					})
+			})
+			.then((song)=>{
+				console.log('song ====> CHECK:', song)
+				// console.log('SONG====>', song)
+				//  console.log('genreId =====>', genreID)
+				console.log('checking song.addgenres:',song.addGenre)
+				  song.addGenres([genreID])
+			 })
+			 .then((data) => {
+				 res.sendStatus(200)
+			 })
+			 .catch( (err) => {
+				 console.log("Error with posting new song", err)
+			 })
 })
 
 
-// app.post("/api/songs", (req, res)=>{
-// 	var genreID;
-//
-// 	Artist.findOrCreate({
-// 		where: {name: req.body.artist}
-// 	})
-// 	.then((artist)=>{
-// 		console.log(artist, '<-- artist')
-// 		 return Song.findOrCreate({
-// 			where: {
-// 				title: req.body.song,
-// 				youtube_url: req.body.url,
-// 				artistId: artist[0].dataValues.id
-// 			}
-// 		})
-// 	})
-// 	.then((song)=>{
-// 		// console.log(song, '<-- This is our song object.')
-// 		return Genre.findOrCreate({
-// 			where: {
-// 				title: req.body.genre
-// 			}
-// 			Genre.findOne().then(function(genre) {
-// 				Globalgenre = genre
-// 			})
-// 		})
-// 	})
-// 	.then((genre)=>{
-// 		console.log(genre, '<-- genre!');
-// 		song.addGenres([genre[0].dataValues.id])
-// 	})
-// 	.catch((error)=>{
-// 		console.log(error)
-// 	})
-// })
+app.get('/api/genre/:genre', (req, res)=>{
+	Genre.findOne({
+		where:
+			{title: req.params.genre}
+	})
+	.then((data)=>{
+		console.log(data.dataValues.id)
+		res.send(data)
+	})
+	.catch((error)=>{
+		console.log(error)
+	})
+})
 
 
-// app.get('/api/genre/:genre', (req, res)=>{
-// 	Genre.findOne({
-// 		where:
-// 			{title: req.params.genre}
-// 	})
-// 	.then((data)=>{
-// 		console.log(data.dataValues.id)
-// 		res.send(data)
-// 	})
-// 	.catch((error)=>{
-// 		console.log(error)
-// 	})
-// })
+app.put('/api/songs/:id/:newTitle', (req,res) =>{
+	Song.update({title:req.params.title}, {where:{id:req.params.id}})
+	.then((data)=>{
+		console.log(data, 'I updated the song title by their id')
+		res.send(data);
+	}).catch((error)=>{
+		res.send(error, 'Error!!');
+	})
+})
 
+app.delete('/api/songs/:id', (req,res)=>{
+	Song.destroy({where:{id:req.params.id}})
+	.then((data)=>{
+		console.log(data,'I just deleted the folowing song');
+		res.send(data);
+	}).catch((error) =>{
+		res.send(error, 'Error!');
+	})
+})
+
+app.get('/api/playlists', (req,res)=>{
+	Playlist.findAll()
+	.then((data)=>{
+		console.log(data, 'I have all the playlists!');
+		res.send(data);
+	}).catch((error)=>{
+		res.send(error, 'Error!');
+	})
+})
+
+app.get('/api/playlists/:id', (req,res)=>{
+	Playlist.findById({id:req.params.id})
+	.then((data)=>{
+		console.log(data, 'I found this playlist!');
+		res.send(data);
+	}).catch((error)=>{
+		res.send(error, 'Error!');
+	})
+})
+
+//Skipping # 13 --- USING POST METHOD TO CREATE A NEW PLAYLIST
+//Skipping #17  --- USING POST METHOD TO CREATE A NEW GENRE
+
+app.delete('/api/playlists/:id', (req,res)=>{
+	Playlist.destroy({where:{id:req.params.id}})
+	.then((data)=>{
+		console.log(data, 'I just deleted this playlists');
+		res.send(data);
+	}).catch((error)=>{
+		res.send(error, 'Error!!');
+	})
+})
+
+app.get('/api/genres', (req,res)=>{
+	Genre.findAll()
+	.then((data)=>{
+		console.log(data, 'this is all the of genres');
+		res.send(data);
+	}).catch((error)=>{
+		res.send(error, 'Error!');
+	})
+})
+
+app.get('/api/genres/:id/:newGenre', (req,res)=>{
+	Genre.update({title:req.params.title}, {where:{id:req.params.id}})
+	.then((data)=>{
+		console.log(data, 'I updated the song title by their id')
+		res.send(data);
+	}).catch((error)=>{
+		res.send(error, 'Error!!');
+	})
+})
+
+//THIS IS OUR FRONT-END
+app.get('/*', (req,res)=>{
+	res.sendFile(path.join(__dirname, 'front/index.html'));
+})
 // first, find or create artist,
 // then, we find or create song,
 // then, accessor method we add artist to song
