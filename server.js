@@ -98,52 +98,94 @@ app.get('/api/songs/:id', (req, res)=>{
 	})
 })
 
-app.post("/api/songs", (req, res)=>{
-	var globalSong;
+
+//refactored version
+
+app.post('/api/songs', (req, res)=>{
+	let genreID;
+	Genre.findOrCreate({
+				where: {title: req.body.genre}
+			})
+		.then((genre)=>{
+			genreID = genre[0].dataValues.id
+			console.log(genreID)
+		})
+
 	Artist.findOrCreate({
 		where: {name: req.body.artist}
 	})
 	.then((artist)=>{
-		 Song.findOrCreate({
-			where: {
-				title: req.body.song,
-				youtube_url: req.body.url,
-				artistId: artist[0].dataValues.id
+		Song.findOrCreate({
+		 where: {
+			 title: req.body.song,
+			 youtube_url: req.body.url,
+			 artistId: artist[0].dataValues.id
 			}
 		})
-		.then((song)=>{
-			//console.log(song)
-			//globalSong = song;
-			Genre.findOrCreate({
-				where: {
-					title: req.body.genre
-				}
-			})
-			.then((genre)=>{
-				console.log(genre[0]);
-			//	globalSong.addGenres([genre[0].dataValues.id])
-			 })
-		})
-
-
 	})
-
+	.then((song)=>{
+		 console.log(song)
+		 song.addGenres([genreID])
+	 })
+	 .then((data) => {
+		 res.senStatus(200)
+	 })
+	 .catch( (err) => {
+		 console.log("Error with posting new song", err)
+	 })
 })
 
 
-app.get('/api/genre/:genre', (req, res)=>{
-	Genre.findOne({
-		where:
-			{title: req.params.genre}
-	})
-	.then((data)=>{
-		console.log(data.dataValues.id)
-		res.send(data)
-	})
-	.catch((error)=>{
-		console.log(error)
-	})
-})
+// app.post("/api/songs", (req, res)=>{
+// 	var genreID;
+//
+// 	Artist.findOrCreate({
+// 		where: {name: req.body.artist}
+// 	})
+// 	.then((artist)=>{
+// 		console.log(artist, '<-- artist')
+// 		 return Song.findOrCreate({
+// 			where: {
+// 				title: req.body.song,
+// 				youtube_url: req.body.url,
+// 				artistId: artist[0].dataValues.id
+// 			}
+// 		})
+// 	})
+// 	.then((song)=>{
+// 		// console.log(song, '<-- This is our song object.')
+// 		return Genre.findOrCreate({
+// 			where: {
+// 				title: req.body.genre
+// 			}
+// 			Genre.findOne().then(function(genre) {
+// 				Globalgenre = genre
+// 			})
+// 		})
+// 	})
+// 	.then((genre)=>{
+// 		console.log(genre, '<-- genre!');
+// 		song.addGenres([genre[0].dataValues.id])
+// 	})
+// 	.catch((error)=>{
+// 		console.log(error)
+// 	})
+// })
+
+
+// app.get('/api/genre/:genre', (req, res)=>{
+// 	Genre.findOne({
+// 		where:
+// 			{title: req.params.genre}
+// 	})
+// 	.then((data)=>{
+// 		console.log(data.dataValues.id)
+// 		res.send(data)
+// 	})
+// 	.catch((error)=>{
+// 		console.log(error)
+// 	})
+// })
 
 // first, find or create artist,
 // then, we find or create song,
