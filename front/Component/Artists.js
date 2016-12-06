@@ -33,6 +33,7 @@ var that = this;
 		<ol>
 		{displayArtists}
 		</ol>
+
 		</div>
 
 		)
