@@ -44,7 +44,7 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	(function webpackMissingModule() { throw new Error("Cannot find module \"./front/App.jsx\""); }());
+	module.exports = __webpack_require__(1);
 
 
 /***/ },
@@ -67,6 +67,34 @@
 	
 	var _Navbar2 = _interopRequireDefault(_Navbar);
 	
+<<<<<<< HEAD
+	var _Artists = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./Component/Artists\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	
+	var _Artists2 = _interopRequireDefault(_Artists);
+	
+	var _Songs = __webpack_require__(236);
+	
+	var _Songs2 = _interopRequireDefault(_Songs);
+	
+	var _Playlist = __webpack_require__(237);
+	
+	var _Playlist2 = _interopRequireDefault(_Playlist);
+	
+	var _CreatePlaylist = __webpack_require__(238);
+	
+	var _CreatePlaylist2 = _interopRequireDefault(_CreatePlaylist);
+	
+	var _IndividualPlaylist = __webpack_require__(239);
+	
+	var _IndividualPlaylist2 = _interopRequireDefault(_IndividualPlaylist);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	//import Navbar from './Test'
+	
+	// import './css-folder/Navbar.css';
+	
+=======
 	var _Artists = __webpack_require__(235);
 	
 	var _Artists2 = _interopRequireDefault(_Artists);
@@ -79,6 +107,7 @@
 	// import IndividualPlaylist from './Component/IndividualPlaylist';
 	//import Navbar from './Test'
 	
+>>>>>>> 3f03d37ead84776b8d3621d42e91dde1ccecacf1
 	//Files
 	var App = _react2.default.createClass({
 		displayName: 'App',
@@ -86,9 +115,13 @@
 			return _react2.default.createElement(
 				'div',
 				null,
+<<<<<<< HEAD
+				_react2.default.createElement(_Navbar2.default, null)
+=======
 				_react2.default.createElement(_Navbar2.default, null),
 				',',
 				_react2.default.createElement(_Artists2.default, null)
+>>>>>>> 3f03d37ead84776b8d3621d42e91dde1ccecacf1
 			);
 		}
 	}); //React
@@ -100,6 +133,15 @@
 		_react2.default.createElement(
 			_reactRouter.Route,
 			{ path: '/', component: App },
+<<<<<<< HEAD
+			_react2.default.createElement(_reactRouter.Route, { path: '/artists', component: _Artists2.default }),
+			_react2.default.createElement(_reactRouter.Route, { path: '/songs', component: _Songs2.default }),
+			_react2.default.createElement(_reactRouter.Route, { path: '/playlist', component: _Playlist2.default }),
+			_react2.default.createElement(_reactRouter.Route, { path: '/create-playlist', component: _CreatePlaylist2.default }),
+			_react2.default.createElement(_reactRouter.Route, { path: '/individual-playlist', component: _IndividualPlaylist2.default })
+		)
+	), document.getElementById('app'));
+=======
 			_react2.default.createElement(_reactRouter.Route, { path: '/artists', component: _Artists2.default })
 		)
 	), document.getElementById('app'));
@@ -108,6 +150,7 @@
 	// 	<Route path="/playlist" component={Playlist}/>
 	// 	<Route path="/create-playlist" component={CreatePlaylist}/>
 	// 	<Route path="/individual-playlist" component={IndividualPlaylist}/>
+>>>>>>> 3f03d37ead84776b8d3621d42e91dde1ccecacf1
 
 /***/ },
 /* 2 */
@@ -26428,7 +26471,11 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
+<<<<<<< HEAD
+	  value: true
+=======
 	   value: true
+>>>>>>> 3f03d37ead84776b8d3621d42e91dde1ccecacf1
 	});
 	
 	var _react = __webpack_require__(2);
@@ -26440,6 +26487,35 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Navbar = function Navbar() {
+<<<<<<< HEAD
+	  return _react2.default.createElement(
+	    'div',
+	    { id: 'navbar' },
+	    _react2.default.createElement(
+	      _reactRouter.Link,
+	      { to: '/artists' },
+	      'Artists'
+	    ),
+	    _react2.default.createElement('br', null),
+	    _react2.default.createElement(
+	      _reactRouter.Link,
+	      { to: '/songs' },
+	      'Songs'
+	    ),
+	    _react2.default.createElement('br', null),
+	    _react2.default.createElement(
+	      _reactRouter.Link,
+	      { to: '/playlist' },
+	      'Playlist'
+	    ),
+	    _react2.default.createElement('br', null),
+	    _react2.default.createElement(
+	      _reactRouter.Link,
+	      { to: '/create-playlist' },
+	      'Create-Playlist'
+	    )
+	  );
+=======
 	   return _react2.default.createElement(
 	      'div',
 	      { id: 'navbar' },
@@ -26467,11 +26543,37 @@
 	         'Create-Playlist'
 	      )
 	   );
+>>>>>>> 3f03d37ead84776b8d3621d42e91dde1ccecacf1
 	};
 	
 	exports.default = Navbar;
 
 /***/ },
+<<<<<<< HEAD
+/* 235 */,
+/* 236 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+/***/ },
+/* 237 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+/***/ },
+/* 238 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+/***/ },
+/* 239 */
+/***/ function(module, exports) {
+
+	"use strict";
+=======
 /* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -36765,6 +36867,7 @@
 	
 	return jQuery;
 	} );
+>>>>>>> 3f03d37ead84776b8d3621d42e91dde1ccecacf1
 
 /***/ }
 /******/ ]);

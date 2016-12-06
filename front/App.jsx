@@ -10,7 +10,6 @@ import Artists from './Component/Artists';
 // import Playlist from './Component/Playlist';
 // import CreatePlaylist from './Component/CreatePlaylist';
 // import IndividualPlaylist from './Component/IndividualPlaylist';
-//import Navbar from './Test'
 
 const App = React.createClass({
 	render(){
@@ -25,12 +24,11 @@ const App = React.createClass({
 
 ReactDOM.render(
 <Router history={browserHistory}>
-	<Route path="/" component={App} >
-	<Route path="/artists" component={Artists}/>
-</Route>
+	<Route path="/" component={App}>
+		<Route path="/artists" component={Artists}/>
+	</Route>
 </Router>
-,document.getElementById('app')
-)
+,document.getElementById('app'))
 
 
 // <Route path="/songs" component={Songs}/>
