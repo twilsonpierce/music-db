@@ -1,21 +1,16 @@
-//Server
 const express = require('express');
 const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
-
-//Database
 const Sequelize = require('sequelize');
 const sequelizeConnection = require('./db');
-
-//Models
 const Artist = require('./models/artist-model.js');
 const Song = require('./models/song-model.js');
 const Genre = require('./models/genre-model.js');
-const Playlist = require('./models/playlist-model.js');
 
 
 //This app file will not be used using express instead it will be excluded
+
 app.use(express.static(path.join(__dirname, '/front/bundle')));
 
 //body-parser middleware adds .body property to req (if we make a POST AJAX request with some data attached, that data will be accessible as req.body)
@@ -207,43 +202,6 @@ app.get('/api/playlists/:id', (req,res)=>{
 	})
 })
 
-//==============================================================================
-//Skipping # 13 --- USING POST METHOD TO CREATE A NEW PLAYLIST
-//playlist id and a song id
-//playlist field and song field
-//playlist findorcreate => pass playlist to
-app.post('/api/playlists', (req, res)=>{
-	let songID;
-	const songFinder = () => {
-		console.log(req.body.song)
-		Song.findOne({
-			where: {
-				title: req.body.song
-			}
-		})
-		.then((song)=>{
-			console.log('song====>', song.dataValues.id)
-			songID = song.dataValues.id
-			console.log('songID =====>', songID)
-		})
-	};
-	songFinder();
-
-	Playlist.findOrCreate({
-		where: {
-			title: req.body.playlist
-		}
-	})
-	.then((playlist)=>{
-		console.log('plalist =====>', playlist)
-		// playlist[0].addSongs([songID])
-	}).then((data)=>{
-		res.sendStatus(200)
-	}).catch((err)=>{
-		console.log('Error with posting new playlists')
-	})
-});
-//==============================================================================
 
 //Skipping #17  --- USING POST METHOD TO CREATE A NEW GENRE
 
