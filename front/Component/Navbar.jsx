@@ -1,6 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router';
 const Navbar = () => (
+
+
   <div id="navbar">
     <Link to="/artists">Artists</Link>
     <br/>
