@@ -2,11 +2,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Router, Route, Link, browserHistory} from 'react-router';
-<<<<<<< HEAD
-// import './css-folder/Navbar.css';
-=======
-
->>>>>>> 308e8c48e77dd23426efef27e2610e30ebbb2d6b
 
 //Files
 import Navbar from './Component/Navbar';
