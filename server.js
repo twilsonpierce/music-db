@@ -208,10 +208,8 @@ app.get('/api/playlists/:id', (req,res)=>{
 })
 
 //==============================================================================
-//Skipping # 13 --- USING POST METHOD TO CREATE A NEW PLAYLIST
-//playlist id and a song id
-//playlist field and song field
-//playlist findorcreate => pass playlist to
+//#13 --- USING POST METHOD TO CREATE A NEW PLAYLIST
+//UP TO DATE
 app.post('/api/playlists', (req, res)=>{
 	let songID;
 	const songFinder = () => {
