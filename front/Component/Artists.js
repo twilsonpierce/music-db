@@ -34,3 +34,4 @@ var that = this;
 })
 
 export default Artists;
+//updated
