@@ -202,9 +202,43 @@ app.get('/api/playlists/:id', (req,res)=>{
 	})
 })
 
+//==============================================================================
+//#13 --- USING POST METHOD TO CREATE A NEW PLAYLIST
+//UP TO DATE
+app.post('/api/playlists', (req, res)=>{
+	let songID;
+	const songFinder = () => {
+		console.log(req.body.song)
+		Song.findOne({
+			where: {
+				title: req.body.song
+			}
+		})
+		.then((song)=>{
+			console.log('song====>', song.dataValues.id)
+			songID = song.dataValues.id
+			console.log('songID =====>', songID)
+		})
+	};
+	songFinder();
+
+	Playlist.findOrCreate({
+		where: {
+			title: req.body.playlist
+		}
+	})
+	.then((playlist)=>{
+		console.log('plalist =====>', playlist)
+		// playlist[0].addSongs([songID])
+	}).then((data)=>{
+		res.sendStatus(200)
+	}).catch((err)=>{
+		console.log('Error with posting new playlists')
+	})
+});
+//============================================================================='/=
 
 //Skipping #17  --- USING POST METHOD TO CREATE A NEW GENRE
-
 app.delete('/api/playlists/:id', (req,res)=>{
 	Playlist.destroy({where:{id:req.params.id}})
 	.then((data)=>{
