@@ -28,6 +28,7 @@ ReactDOM.render(
 		<Route path="/artists" component={Artists}/>
 		<Route path="/songs" component={Songs}/>
 		<Route path="/playlist" component={Playlist}/>
+		<Route path=":playlistName" component={Playlist}/>
 		<Route path="/indi-playlist" component={IndividualPlaylist}/>
 	</Route>
 </Router>

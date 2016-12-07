@@ -112,6 +112,7 @@
 			_react2.default.createElement(_reactRouter.Route, { path: '/artists', component: _Artists2.default }),
 			_react2.default.createElement(_reactRouter.Route, { path: '/songs', component: _Songs2.default }),
 			_react2.default.createElement(_reactRouter.Route, { path: '/playlist', component: _Playlist2.default }),
+			_react2.default.createElement(_reactRouter.Route, { path: ':playlistName', component: _Playlist2.default }),
 			_react2.default.createElement(_reactRouter.Route, { path: '/indi-playlist', component: _IndividualPlaylist2.default })
 		)
 	), document.getElementById('app'));
