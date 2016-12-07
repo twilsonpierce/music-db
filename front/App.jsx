@@ -5,7 +5,8 @@ import {Router, Route, Link, browserHistory} from 'react-router';
 
 //Files
 import Navbar from './Component/Navbar';
-import Artists from './Component/Artists';
+import Artists from './Component/Artists.jsx';
+import Songs from './Component/Songs.jsx';
 // import Songs from './Component/Songs';
 // import Playlist from './Component/Playlist';
 // import CreatePlaylist from './Component/CreatePlaylist';
@@ -15,8 +16,8 @@ const App = React.createClass({
 	render(){
 		return (
 		<div>
-			<Navbar />,
-			<Artists/>
+			<Navbar />
+			{this.props.children}
 		</div>
 		)
 	}
@@ -25,13 +26,14 @@ const App = React.createClass({
 ReactDOM.render(
 <Router history={browserHistory}>
 	<Route path="/" component={App}>
-		<Route path="/artists" component={Artists}/>
+	<Route path="/artists" component={Artists}/>
+	<Route path="/songs" component={Songs}/>
 	</Route>
 </Router>
 ,document.getElementById('app'))
 
 
-// <Route path="/songs" component={Songs}/>
+
 // 	<Route path="/playlist" component={Playlist}/>
 // 	<Route path="/create-playlist" component={CreatePlaylist}/>
 // 	<Route path="/individual-playlist" component={IndividualPlaylist}/>
