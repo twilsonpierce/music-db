@@ -1,21 +1,16 @@
-//Server
 const express = require('express');
 const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
-
-//Database
 const Sequelize = require('sequelize');
 const sequelizeConnection = require('./db');
-
-//Models
 const Artist = require('./models/artist-model.js');
 const Song = require('./models/song-model.js');
 const Genre = require('./models/genre-model.js');
-const Playlist = require('./models/playlist-model.js');
 
 
 //This app file will not be used using express instead it will be excluded
+
 app.use(express.static(path.join(__dirname, '/front/bundle')));
 
 //body-parser middleware adds .body property to req (if we make a POST AJAX request with some data attached, that data will be accessible as req.body)
@@ -219,8 +214,17 @@ app.post('/api/playlists', (req, res)=>{
 	})
 })
 
+app.post('/api/genres', (req,res)=>{
+	Genre.create({title:req.body.title})
+		.then((data)=>{
+			res.send(data);
+			console.log('you just created a new genre!', data)
+		}).catch((error)=>{
+			res.send(error);
+			console.log('Error!!!')
+		})
+})
 
-//Skipping #17  --- USING POST METHOD TO CREATE A NEW GENRE
 
 app.delete('/api/playlists/:id', (req,res)=>{
 	Playlist.destroy({where:{id:req.params.id}})
