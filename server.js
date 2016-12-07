@@ -130,8 +130,8 @@ app.post('/api/songs', (req, res)=>{
 	})
 	.then((song)=>{
 		console.log('song ====> CHECK:', song)
+		console.log('genreID', genreID)
 	  song[0].addGenres([genreID])
-		console.log('checking song.addgenres:',song.addGenre)
 	 })
 })
 

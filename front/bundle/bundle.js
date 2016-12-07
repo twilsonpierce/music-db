@@ -67,9 +67,13 @@
 	
 	var _Navbar2 = _interopRequireDefault(_Navbar);
 	
-	var _Artists = __webpack_require__(235);
+	var _Artists = __webpack_require__(237);
 	
 	var _Artists2 = _interopRequireDefault(_Artists);
+	
+	var _Songs = __webpack_require__(238);
+	
+	var _Songs2 = _interopRequireDefault(_Songs);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -78,7 +82,7 @@
 	// import CreatePlaylist from './Component/CreatePlaylist';
 	// import IndividualPlaylist from './Component/IndividualPlaylist';
 	
-	//Files
+	//React
 	var App = _react2.default.createClass({
 		displayName: 'App',
 		render: function render() {
@@ -89,7 +93,9 @@
 				this.props.children
 			);
 		}
-	}); //React
+	});
+	
+	//Files
 	
 	
 	_reactDom2.default.render(_react2.default.createElement(
@@ -98,11 +104,11 @@
 		_react2.default.createElement(
 			_reactRouter.Route,
 			{ path: '/', component: App },
-			_react2.default.createElement(_reactRouter.Route, { path: '/artists', component: _Artists2.default })
+			_react2.default.createElement(_reactRouter.Route, { path: '/artists', component: _Artists2.default }),
+			_react2.default.createElement(_reactRouter.Route, { path: '/songs', component: _Songs2.default })
 		)
 	), document.getElementById('app'));
 	
-	// <Route path="/songs" component={Songs}/>
 	// 	<Route path="/playlist" component={Playlist}/>
 	// 	<Route path="/create-playlist" component={CreatePlaylist}/>
 	// 	<Route path="/individual-playlist" component={IndividualPlaylist}/>
@@ -26470,87 +26476,7 @@
 	exports.default = Navbar;
 
 /***/ },
-/* 235 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	
-	var _react = __webpack_require__(2);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _jquery = __webpack_require__(236);
-	
-	var _jquery2 = _interopRequireDefault(_jquery);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var Artists = _react2.default.createClass({
-		displayName: 'Artists',
-		getInitialState: function getInitialState() {
-			return { artists: [] };
-		},
-		componentDidMount: function componentDidMount() {
-			var _this = this;
-	
-			_jquery2.default.ajax({
-				url: '/api/artists',
-				type: 'GET',
-				success: function success(data) {
-					console.log('data=>', data);
-					//  this.setState({artists: data})
-					data ? _this.setState({ artists: data }) : console.log('Error in data object!s');
-				}
-			});
-		},
-		render: function render() {
-			console.log('current state of artist:', this.state.artists);
-			return _react2.default.createElement(
-				'div',
-				null,
-				'Hello!'
-			);
-		}
-	});
-	
-	// const Artists = React.createClass({
-	// 	getInitialState(){
-	// 		return ({artists: []})
-	// 	},
-	// 	componentDidMount(){
-	// 		let that = this;
-	// 		$.ajax({
-	// 			url: '/api/artists',
-	// 			type:'GET',
-	// 			success:((data)=>{
-	// 			console.log('data', data);
-	// 		//console.log('name', data[0].name);
-	// 			data ? that.setState({artists:data}): console.log("error");
-	// 		})
-	// 	},
-	// 	render(){
-	// 		let displayArtists= this.state.artists.map((value, i)=>{
-	// 			<li key={i}>{value.name}</li>i
-	// 		})
-	// 			console.log('displayartist',displayArtists);
-	//
-	// 		return (
-	// 		<div>
-	// 			<h1> Artists!! </h1>
-	// 			<ol>
-	// 			</ol>
-	// 		</div>
-	// 		)
-	// 	}
-	// })
-	
-	exports.default = Artists;
-
-/***/ },
+/* 235 */,
 /* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -36775,6 +36701,133 @@
 	return jQuery;
 	} );
 
+
+/***/ },
+/* 237 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _jquery = __webpack_require__(236);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Artists = _react2.default.createClass({
+		displayName: 'Artists',
+		getInitialState: function getInitialState() {
+			return { artists: [] };
+		},
+		componentDidMount: function componentDidMount() {
+			var _this = this;
+	
+			_jquery2.default.ajax({
+				url: '/api/artists',
+				type: 'GET',
+				success: function success(data) {
+					console.log(data);
+					console.log(data[0].name);
+					data ? _this.setState({ artists: data }) : console.log('Error with artists object');
+				}
+			});
+		},
+		render: function render() {
+			var ArtistDisplay = this.state.artists.map(function (value, index) {
+				return _react2.default.createElement(
+					'li',
+					{ key: index },
+					_react2.default.createElement(
+						'h1',
+						null,
+						value.name
+					)
+				);
+			});
+			console.log(this.state.artists, 'this is artists');
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(
+					'h1',
+					null,
+					' Artist Page ! '
+				),
+				ArtistDisplay
+			);
+		}
+	});
+	
+	exports.default = Artists;
+
+/***/ },
+/* 238 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _jquery = __webpack_require__(236);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Songs = _react2.default.createClass({
+		displayName: 'Songs',
+		getInitialState: function getInitialState() {
+			return { songs: [] };
+		},
+		componentDidMount: function componentDidMount() {
+			var _this = this;
+	
+			_jquery2.default.ajax({
+				url: '/api/songs',
+				type: 'GET',
+				success: function success(data) {
+					console.log(data);
+					data ? _this.setState({ songs: data }) : console.log('Error is with song data');
+				}
+			});
+		},
+		render: function render() {
+			var DisplaySongs = this.state.songs.map(function (value, index) {
+				_react2.default.createElement(
+					'li',
+					{ key: index },
+					value.title
+				);
+			});
+			console.log(this.state.songs, 'this is songs');
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(
+					'h1',
+					null,
+					' Song Page '
+				),
+				DisplaySongs
+			);
+		}
+	});
+	
+	exports.default = Songs;
 
 /***/ }
 /******/ ]);
