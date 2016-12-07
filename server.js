@@ -206,51 +206,86 @@ app.get('/api/playlists/:id', (req,res)=>{
 //#13 --- USING POST METHOD TO CREATE A NEW PLAYLIST
 //UP TO DATE
 
-const songFinder = (req) => {
-	// let songID;
-	 return Song.findOne({
-		where: {
-			title: req.body.song
-		}
-	})
-	.then((song)=>{
-		console.log('SONG ==>',song)
-		  songID = song.dataValues.id
-			 return songID
-		// console.log('songID =====>', songID)
-	})
-};
+// app.post('/api/playlists', (req,res) =>{
+// 	const songFinder = (req) =>{
+// 		let data = {};
+// 		let reqbody = req
 
-app.post('/api/playlists', (req, res)=>{
+// 		return  new Promise((resolve,reject)=>{
+// 			if(true){
+// 				resolve('success!')
+// 			}else{
+// 				reject('failed!')
+// 			}
+// 		}).then((req) =>{
+// 			console.log('this is req!!!', reqbody);
+// 			}).then(()=>{
+// 			var x = 10;
+// 			var y = 20;
+
+// 			data.x = x; 
+// 			data.y = y;
+// 				console.log('data', data);
+// 			})
+// 	}
+// 	songFinder();
+// })
+
+app.post('/api/playlists', (req,res)=>{
 	let songID;
-	let pleaseWork = new Promise((songFinder, reject)=>{
-		if(true){
-			 songFinder(req);
-		} else {
-			reject('failure!')
-		}
+	Song.findOne({where:{title:req.body.song}})
+	.then((song)=>{
+		songID = song.dataValues.id
+		console.log(songID, 'this is the song id ');
+		console.log(song, 'this is the song');
 	})
+})
 
-	pleaseWork
-	.then((songID)=>{
-		//THIS ONLY TAKES IN REQ OBJECT AS PARAM.
-		console.log('songID==>', songID)
-		// console.log('hello')
-		// Playlist.findOrCreate({
-		// 	where: {
-		// 		title: req.body.playlist
-		// 	}
-		// })
-	// })
-	// .then((playlist)=>{
-		// console.log('plalist =====>', playlist)
-		// playlist[0].addSongs([songID])
-	}).then((data)=>{
-		res.sendStatus(200)
-	}).catch((err)=>{
-		console.log('Error with posting new playlists')
-	})
-});
+// const songFinder = (req) => {
+// 	// let songID;
+// 	  return Song.findOne({
+// 		where: {
+// 			title: req.body.song
+// 		}
+// 	})
+// 	.then((song)=>{
+// 		console.log('SONG ==>',song)
+// 		  songID = song.dataValues.id
+// 			 return songID
+// 		// console.log('songID =====>', songID)
+// 	})
+// };
+
+// app.post('/api/playlists', (req, res)=>{
+// 	let songID;
+// 	let pleaseWork = new Promise((songFinder, reject)=>{
+// 		if(true){
+// 		return songFinder(req);
+// 		} else {
+// 			reject('failure!')
+// 		}
+// 	})
+
+// 	 pleaseWork
+// 	.then((songID)=>{
+// 		//THIS ONLY TAKES IN REQ OBJECT AS PARAM.
+// 		console.log('songID==>', songID)
+// 		// console.log('hello')
+// 		// Playlist.findOrCreate({
+// 		// 	where: {
+// 		// 		title: req.body.playlist
+// 		// 	}
+// 		// })
+// 	// })
+// 	// .then((playlist)=>{
+// 		// console.log('plalist =====>', playlist)
+// 		// playlist[0].addSongs([songID])
+// 	}).then((data)=>{
+// 		res.sendStatus(200)
+// 	}).catch((err)=>{
+// 		console.log('Error with posting new playlists')
+// 	})
+// });
 //============================================================================='/=
 
 //Skipping #17  --- USING POST METHOD TO CREATE A NEW GENRE
