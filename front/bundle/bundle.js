@@ -67,11 +67,11 @@
 	
 	var _Navbar2 = _interopRequireDefault(_Navbar);
 	
-	var _Artists = __webpack_require__(237);
+	var _Artists = __webpack_require__(235);
 	
 	var _Artists2 = _interopRequireDefault(_Artists);
 	
-	var _Songs = __webpack_require__(238);
+	var _Songs = __webpack_require__(237);
 	
 	var _Songs2 = _interopRequireDefault(_Songs);
 	
@@ -26476,7 +26476,72 @@
 	exports.default = Navbar;
 
 /***/ },
-/* 235 */,
+/* 235 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _jquery = __webpack_require__(236);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Artists = _react2.default.createClass({
+		displayName: 'Artists',
+		getInitialState: function getInitialState() {
+			return { artists: [] };
+		},
+		componentDidMount: function componentDidMount() {
+			var _this = this;
+	
+			_jquery2.default.ajax({
+				url: '/api/artists',
+				type: 'GET',
+				success: function success(data) {
+					console.log(data);
+					console.log(data[0].name);
+					data ? _this.setState({ artists: data }) : console.log('Error with artists object');
+				}
+			});
+		},
+		render: function render() {
+			var ArtistDisplay = this.state.artists.map(function (value, index) {
+				return _react2.default.createElement(
+					'li',
+					{ key: index },
+					_react2.default.createElement(
+						'h1',
+						null,
+						value.name
+					)
+				);
+			});
+			console.log(this.state.artists, 'this is artists');
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(
+					'h1',
+					null,
+					' Artist Page ! '
+				),
+				ArtistDisplay
+			);
+		}
+	});
+	
+	exports.default = Artists;
+
+/***/ },
 /* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -36722,72 +36787,6 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var Artists = _react2.default.createClass({
-		displayName: 'Artists',
-		getInitialState: function getInitialState() {
-			return { artists: [] };
-		},
-		componentDidMount: function componentDidMount() {
-			var _this = this;
-	
-			_jquery2.default.ajax({
-				url: '/api/artists',
-				type: 'GET',
-				success: function success(data) {
-					console.log(data);
-					console.log(data[0].name);
-					data ? _this.setState({ artists: data }) : console.log('Error with artists object');
-				}
-			});
-		},
-		render: function render() {
-			var ArtistDisplay = this.state.artists.map(function (value, index) {
-				return _react2.default.createElement(
-					'li',
-					{ key: index },
-					_react2.default.createElement(
-						'h1',
-						null,
-						value.name
-					)
-				);
-			});
-			console.log(this.state.artists, 'this is artists');
-			return _react2.default.createElement(
-				'div',
-				null,
-				_react2.default.createElement(
-					'h1',
-					null,
-					' Artist Page ! '
-				),
-				ArtistDisplay
-			);
-		}
-	});
-	
-	exports.default = Artists;
-
-/***/ },
-/* 238 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	
-	var _react = __webpack_require__(2);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _jquery = __webpack_require__(236);
-	
-	var _jquery2 = _interopRequireDefault(_jquery);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
 	var Songs = _react2.default.createClass({
 		displayName: 'Songs',
 		getInitialState: function getInitialState() {
@@ -36807,11 +36806,7 @@
 		},
 		render: function render() {
 			var DisplaySongs = this.state.songs.map(function (value, index) {
-				_react2.default.createElement(
-					'li',
-					{ key: index },
-					value.title
-				);
+				console.log('song page');
 			});
 			console.log(this.state.songs, 'this is songs');
 			return _react2.default.createElement(

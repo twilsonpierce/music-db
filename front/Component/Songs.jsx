@@ -17,7 +17,7 @@ const Songs = React.createClass({
 	},
 	render(){
 		let DisplaySongs = this.state.songs.map((value,index)=>{
-	 			<li key={index}>{value.title}</li>
+	 		console.log('song page');
 		})
 		console.log(this.state.songs, 'this is songs')
 		return (
