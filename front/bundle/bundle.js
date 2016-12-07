@@ -67,20 +67,25 @@
 	
 	var _Navbar2 = _interopRequireDefault(_Navbar);
 	
-	var _Artists = __webpack_require__(235);
+	var _Artists = __webpack_require__(237);
 	
 	var _Artists2 = _interopRequireDefault(_Artists);
 	
-	var _Songs = __webpack_require__(237);
+	var _Songs = __webpack_require__(238);
 	
 	var _Songs2 = _interopRequireDefault(_Songs);
 	
+	var _Playlist = __webpack_require__(240);
+	
+	var _Playlist2 = _interopRequireDefault(_Playlist);
+	
+	var _IndividualPlaylist = __webpack_require__(239);
+	
+	var _IndividualPlaylist2 = _interopRequireDefault(_IndividualPlaylist);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	// import Songs from './Component/Songs';
-	// import Playlist from './Component/Playlist';
 	// import CreatePlaylist from './Component/CreatePlaylist';
-	// import IndividualPlaylist from './Component/IndividualPlaylist';
 	
 	//React
 	var App = _react2.default.createClass({
@@ -105,13 +110,13 @@
 			_reactRouter.Route,
 			{ path: '/', component: App },
 			_react2.default.createElement(_reactRouter.Route, { path: '/artists', component: _Artists2.default }),
-			_react2.default.createElement(_reactRouter.Route, { path: '/songs', component: _Songs2.default })
+			_react2.default.createElement(_reactRouter.Route, { path: '/songs', component: _Songs2.default }),
+			_react2.default.createElement(_reactRouter.Route, { path: '/playlist', component: _Playlist2.default }),
+			_react2.default.createElement(_reactRouter.Route, { path: '/indi-playlist', component: _IndividualPlaylist2.default })
 		)
 	), document.getElementById('app'));
 	
-	// 	<Route path="/playlist" component={Playlist}/>
-	// 	<Route path="/create-playlist" component={CreatePlaylist}/>
-	// 	<Route path="/individual-playlist" component={IndividualPlaylist}/>
+	//<Route path="/create-playlist" component={CreatePlaylist}/>
 
 /***/ },
 /* 2 */
@@ -26476,72 +26481,7 @@
 	exports.default = Navbar;
 
 /***/ },
-/* 235 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	
-	var _react = __webpack_require__(2);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _jquery = __webpack_require__(236);
-	
-	var _jquery2 = _interopRequireDefault(_jquery);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var Artists = _react2.default.createClass({
-		displayName: 'Artists',
-		getInitialState: function getInitialState() {
-			return { artists: [] };
-		},
-		componentDidMount: function componentDidMount() {
-			var _this = this;
-	
-			_jquery2.default.ajax({
-				url: '/api/artists',
-				type: 'GET',
-				success: function success(data) {
-					console.log(data);
-					console.log(data[0].name);
-					data ? _this.setState({ artists: data }) : console.log('Error with artists object');
-				}
-			});
-		},
-		render: function render() {
-			var ArtistDisplay = this.state.artists.map(function (value, index) {
-				return _react2.default.createElement(
-					'li',
-					{ key: index },
-					_react2.default.createElement(
-						'h1',
-						null,
-						value.name
-					)
-				);
-			});
-			console.log(this.state.artists, 'this is artists');
-			return _react2.default.createElement(
-				'div',
-				null,
-				_react2.default.createElement(
-					'h1',
-					null,
-					' Artist Page ! '
-				),
-				ArtistDisplay
-			);
-		}
-	});
-	
-	exports.default = Artists;
-
-/***/ },
+/* 235 */,
 /* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -36787,6 +36727,72 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	var Artists = _react2.default.createClass({
+		displayName: 'Artists',
+		getInitialState: function getInitialState() {
+			return { artists: [] };
+		},
+		componentDidMount: function componentDidMount() {
+			var _this = this;
+	
+			_jquery2.default.ajax({
+				url: '/api/artists',
+				type: 'GET',
+				success: function success(data) {
+					console.log(data);
+					console.log(data[0].name);
+					data ? _this.setState({ artists: data }) : console.log('Error with artists object');
+				}
+			});
+		},
+		render: function render() {
+			var ArtistDisplay = this.state.artists.map(function (value, index) {
+				return _react2.default.createElement(
+					'li',
+					{ key: index },
+					_react2.default.createElement(
+						'h1',
+						null,
+						value.name
+					)
+				);
+			});
+			console.log(this.state.artists, 'this is artists');
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(
+					'h1',
+					null,
+					' Artist Page ! '
+				),
+				ArtistDisplay
+			);
+		}
+	});
+	
+	exports.default = Artists;
+
+/***/ },
+/* 238 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _jquery = __webpack_require__(236);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
 	var Songs = _react2.default.createClass({
 		displayName: 'Songs',
 		getInitialState: function getInitialState() {
@@ -36823,6 +36829,105 @@
 	});
 	
 	exports.default = Songs;
+
+/***/ },
+/* 239 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _jquery = __webpack_require__(236);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var IndividualPlaylist = _react2.default.createClass({
+	  displayName: 'IndividualPlaylist',
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      'Hello!'
+	    );
+	  }
+	});
+	
+	exports.default = IndividualPlaylist;
+
+/***/ },
+/* 240 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(179);
+	
+	var _jquery = __webpack_require__(236);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var IndividualPlaylist = _react2.default.createClass({
+	  displayName: 'IndividualPlaylist',
+	  getInitialState: function getInitialState() {
+	    return { playlist: [] };
+	  },
+	  componentDidMount: function componentDidMount() {
+	    var _this = this;
+	
+	    _jquery2.default.ajax({
+	      url: '/api/playlists',
+	      type: 'GET',
+	      success: function success(data) {
+	        console.log(data[0].title);
+	        data ? _this.setState({ playlist: data }) : console.log('Error with playlist object');
+	      }
+	    });
+	  },
+	  render: function render() {
+	    console.log('state=>', this.state.playlist);
+	    var displayPlaylist = this.state.playlist.map(function (val, idx) {
+	      return _react2.default.createElement(
+	        'li',
+	        { key: idx },
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/indi-playlist', key: idx },
+	          val.title
+	        )
+	      );
+	    });
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        'ol',
+	        null,
+	        displayPlaylist
+	      )
+	    );
+	  }
+	});
+	
+	exports.default = IndividualPlaylist;
 
 /***/ }
 /******/ ]);

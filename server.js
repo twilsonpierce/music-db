@@ -7,6 +7,7 @@ const sequelizeConnection = require('./db');
 const Artist = require('./models/artist-model.js');
 const Song = require('./models/song-model.js');
 const Genre = require('./models/genre-model.js');
+const Playlist = require('./models/playlist-model.js')
 
 
 //This app file will not be used using express instead it will be excluded
