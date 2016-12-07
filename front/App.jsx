@@ -15,8 +15,8 @@ const App = React.createClass({
 	render(){
 		return (
 		<div>
-			<Navbar />,
-			<Artists/>
+			<Navbar />
+			{this.props.children}
 		</div>
 		)
 	}
