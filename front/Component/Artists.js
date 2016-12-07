@@ -2,15 +2,15 @@ import React from 'react';
 import $ from 'jquery';
 
 const Artists = React.createClass({
-getInitialState(){
-	return ({artists: []})
-},
-componentDidMount(){
-var that = this;
-	$.ajax({
-		url: '/api/artists',
-		type:'GET',
-		success:((data)=>{
+	getInitialState(){
+		return ({artists: []})
+	},
+	componentDidMount(){
+		let that = this;
+		$.ajax({
+			url: '/api/artists',
+			type:'GET',
+			success:((data)=>{
 			console.log('data', data);
 		//console.log('name', data[0].name);
 			data ? that.setState({artists:data}): console.log("error");
@@ -34,4 +34,3 @@ var that = this;
 })
 
 export default Artists;
-//updated
